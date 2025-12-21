@@ -1,0 +1,472 @@
+import nodemailer from 'nodemailer';
+
+    <!-- <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Welcome to ${websiteName}</title>
+    </head>
+    <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #000000;">
+      <table role="presentation" style="width: 100%; border-collapse: collapse; background-color: #000000;">
+        <tr>
+          <td align="center" style="padding: 40px 20px;">
+            <table role="presentation" style="width: 600px; max-width: 100%; border-collapse: collapse; background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 40px rgba(236, 72, 153, 0.3);">
+              
+              Header with gradient -->
+              <!-- <tr>
+                <td style="padding: 50px 40px; text-align: center; background: linear-gradient(135deg, #ec4899 0%, #f9a8d4 100%);">
+                  <h1 style="margin: 0; color: #ffffff; font-size: 32px; font-weight: 700; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+                    Welcome to ${websiteName}! 🎉
+                  </h1>
+                  <p style="margin: 12px 0 0; color: #ffffff; font-size: 16px; opacity: 0.95;">
+                    We're excited to have you here
+                  </p>
+                </td>
+              </tr> -->
+
+              <!-- Content -->
+              <!-- <tr>
+                <td style="padding: 50px 40px;">
+                  <p style="margin: 0 0 20px; color: #000000; font-size: 18px; line-height: 1.6;">
+                    Hi <strong style="color: #ec4899;">${userName}</strong>,
+                  </p>
+                  
+                  <p style="margin: 0 0 20px; color: #374151; font-size: 16px; line-height: 1.7;">
+                    Thank you for joining <strong>${websiteName}</strong>! We're thrilled to have you as part of our community. Your account has been successfully created, and you're all set to explore everything we have to offer.
+                  </p>
+                  
+                  <p style="margin: 0 0 35px; color: #374151; font-size: 16px; line-height: 1.7;">
+                    Get ready for an amazing experience with exclusive features, personalized content, and much more!
+                  </p> -->
+
+                  <!-- CTA Button -->
+                  <!-- <table role="presentation" style="margin: 0 auto; border-collapse: collapse;">
+                    <tr>
+                      <td style="border-radius: 8px; background: linear-gradient(135deg, #ec4899 0%, #f9a8d4 100%); box-shadow: 0 4px 12px rgba(236, 72, 153, 0.4);">
+                        <a href="${websiteUrl}" style="display: inline-block; padding: 16px 40px; color: #ffffff; text-decoration: none; font-size: 16px; font-weight: 700; letter-spacing: 0.5px;">
+                          Get Started Now
+                        </a>
+                      </td>
+                    </tr>
+                  </table> -->
+
+                  <!-- Divider -->
+                  <!-- <div style="margin: 40px 0; height: 1px; background: linear-gradient(90deg, transparent, #f9a8d4, transparent);"></div>
+
+                  <p style="margin: 0 0 20px; color: #000000; font-size: 18px; font-weight: 600;">
+                    What's Next?
+                  </p> -->
+
+                  <!-- Feature List -->
+                  <!-- <table role="presentation" style="width: 100%; border-collapse: collapse; margin-bottom: 30px;">
+                    <tr>
+                      <td style="padding: 14px 0;">
+                        <table role="presentation" style="width: 100%; border-collapse: collapse;">
+                          <tr>
+                            <td style="width: 40px; vertical-align: top;">
+                              <div style="width: 28px; height: 28px; background: linear-gradient(135deg, #ec4899, #f9a8d4); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                <span style="color: #ffffff; font-size: 16px; font-weight: 700;">✓</span>
+                              </div>
+                            </td>
+                            <td style="vertical-align: top;">
+                              <p style="margin: 0; color: #374151; font-size: 15px; line-height: 1.6;">
+                                <strong style="color: #000000;">Complete your profile</strong><br>
+                                <span style="color: #6b7280; font-size: 14px;">Add your details to personalize your experience</span>
+                              </p>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 14px 0;">
+                        <table role="presentation" style="width: 100%; border-collapse: collapse;">
+                          <tr>
+                            <td style="width: 40px; vertical-align: top;">
+                              <div style="width: 28px; height: 28px; background: linear-gradient(135deg, #ec4899, #f9a8d4); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                <span style="color: #ffffff; font-size: 16px; font-weight: 700;">✓</span>
+                              </div>
+                            </td>
+                            <td style="vertical-align: top;">
+                              <p style="margin: 0; color: #374151; font-size: 15px; line-height: 1.6;">
+                                <strong style="color: #000000;">Explore our features</strong><br>
+                                <span style="color: #6b7280; font-size: 14px;">Discover everything we have to offer</span>
+                              </p>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 14px 0;">
+                        <table role="presentation" style="width: 100%; border-collapse: collapse;">
+                          <tr>
+                            <td style="width: 40px; vertical-align: top;">
+                              <div style="width: 28px; height: 28px; background: linear-gradient(135deg, #ec4899, #f9a8d4);
+                               border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                <span style="color: #ffffff; font-size: 16px; font-weight: 700;">✓</span>
+                              </div>
+                            </td>
+                            <td style="vertical-align: top;">
+                              <p style="margin: 0; color: #374151; font-size: 15px; line-height: 1.6;">
+                                <strong style="color: #000000;">Connect with the community</strong><br>
+                                <span style="color: #6b7280; font-size: 14px;">Join conversations and make new connections</span>
+                              </p>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table> -->
+
+                  <!-- Help Section -->
+                  <!-- <div style="background-color: #fdf2f8; border-left: 4px solid #ec4899; padding: 20px; border-radius: 6px; margin-top: 30px;">
+                    <p style="margin: 0; color: #374151; font-size: 14px; line-height: 1.6;">
+                      <strong style="color: #000000;">Need help?</strong><br>
+                      If you have any questions or need assistance, our support team is here to help. Just reply to this email!
+                    </p>
+                  </div>
+                </td>
+              </tr> -->
+
+              <!-- Footer -->
+              <!-- <tr>
+                <td style="padding: 40px; background-color: #000000; text-align: center;">
+                  <p style="margin: 0 0 12px; color: #f9a8d4; font-size: 16px; font-weight: 600;">
+                    ${websiteName}
+                  </p>
+                  <p style="margin: 0 0 16px; color: #9ca3af; font-size: 14px; line-height: 1.6;">
+                    © 2024 ${websiteName}. All rights reserved.
+                  </p>
+                  <p style="margin: 0; color: #6b7280; font-size: 12px; line-height: 1.5;">
+                    You're receiving this email because you signed up for ${websiteName}.<br>
+                    If you didn't create this account, please ignore this email.
+                  </p> -->
+                  
+                  <!-- Social Links (optional) -->
+                  <!-- <div style="margin-top: 24px;">
+                    <a href="#" style="display: inline-block; margin: 0 8px; color: #f9a8d4; text-decoration: none; font-size: 12px;">Twitter</a>
+                    <span style="color: #4b5563;">•</span>
+                    <a href="#" style="display: inline-block; margin: 0 8px; color: #f9a8d4; text-decoration: none; font-size: 12px;">Facebook</a>
+                    <span style="color: #4b5563;">•</span>
+                    <a href="#" style="display: inline-block; margin: 0 8px; color: #f9a8d4; text-decoration: none; font-size: 12px;">Instagram</a>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </body>
+    </html> -->
+ 
+    
+     <!-- Configure your email transporter
+    const transporter = nodemailer.createTransporter({
+    host: process.env.SMTP_HOST,
+    port: parseInt(process.env.SMTP_PORT || '587'),
+    secure: false,
+    auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
+    },
+    });
+    
+    interface WelcomeEmailProps {
+    userEmail: string;
+    userName: string;
+    }
+    
+    export async function sendWelcomeEmail({
+    userEmail,
+    userName,
+    }: WelcomeEmailProps) {
+    const emailHtml = ` -->
+    <!DOCTYPE html>
+    <html lang="en">
+    
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Welcome to Her Cycle Bloom</title>
+    </head>
+    
+    <body
+      style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #000000;">
+      <table role="presentation" style="width: 100%; border-collapse: collapse; background-color: #000000;">
+        <tr>
+          <td align="center" style="padding: 40px 20px;">
+            <table role="presentation"
+              style="width: 600px; max-width: 100%; border-collapse: collapse; background-color: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 40px rgba(236, 72, 153, 0.3);">
+    
+              <!-- Header with gradient and floral accent -->
+              <tr>
+                <td
+                  style="padding: 50px 40px 40px; text-align: center; background: linear-gradient(135deg, #ec4899 0%, #f9a8d4 100%); position: relative;">
+                  <!-- Decorative flower emoji -->
+                  <div style="font-size: 48px; margin-bottom: 16px;">🌸</div>
+                  <h1
+                    style="margin: 0; color: #ffffff; font-size: 32px; font-weight: 700; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+                    Welcome to Her Cycle Bloom
+                  </h1>
+                  <p style="margin: 12px 0 0; color: #ffffff; font-size: 16px; opacity: 0.95;">
+                    Your journey to wellness begins here
+                  </p>
+                </td>
+              </tr>
+    
+              <!-- Content -->
+              <tr>
+                <td style="padding: 50px 40px;">
+                  <p style="margin: 0 0 20px; color: #000000; font-size: 18px; line-height: 1.6;">
+                    Hi <strong style="color: #ec4899;">${name}</strong>,
+                  </p>
+    
+                  <p style="margin: 0 0 20px; color: #374151; font-size: 16px; line-height: 1.7;">
+                    Welcome to <strong>Her Cycle Bloom</strong> – your personal companion for understanding and embracing
+                    your cycle! We're here to help you track your period, understand your body, and bloom into your best
+                    self.
+                  </p>
+    
+                  <p style="margin: 0 0 35px; color: #374151; font-size: 16px; line-height: 1.7;">
+                    Whether you're tracking your menstrual cycle, monitoring symptoms, or planning ahead, we've got you
+                    covered with personalized insights and gentle reminders.
+                  </p>
+    
+                  <!-- CTA Button -->
+                  <table role="presentation" style="margin: 0 auto; border-collapse: collapse;">
+                    <tr>
+                      <td
+                        style="border-radius: 30px; background: linear-gradient(135deg, #ec4899 0%, #f9a8d4 100%); box-shadow: 0 4px 12px rgba(236, 72, 153, 0.4);">
+                        <a href="https://hercyclebloom.com"
+                          style="display: inline-block; padding: 16px 40px; color: #ffffff; text-decoration: none; font-size: 16px; font-weight: 700; letter-spacing: 0.5px;">
+                          Start Tracking 🌺
+                        </a>
+                      </td>
+                    </tr>
+                  </table>
+    
+                  <!-- Divider -->
+                  <div
+                    style="margin: 40px 0; height: 2px; background: linear-gradient(90deg, transparent, #f9a8d4, transparent);">
+                  </div>
+    
+                  <p style="margin: 0 0 24px; color: #000000; font-size: 18px; font-weight: 600; text-align: center;">
+                    How Her Cycle Bloom Helps You
+                  </p>
+    
+                  <!-- Feature List -->
+                  <table role="presentation" style="width: 100%; border-collapse: collapse; margin-bottom: 30px;">
+                    <tr>
+                      <td style="padding: 16px 0;">
+                        <table role="presentation" style="width: 100%; border-collapse: collapse;">
+                          <tr>
+                            <td style="width: 50px; vertical-align: top;">
+                              <div
+                                style="width: 36px; height: 36px; background: linear-gradient(135deg, #ec4899, #f9a8d4); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px;">
+                                📅
+                              </div>
+                            </td>
+                            <td style="vertical-align: top; padding-left: 8px;">
+                              <p style="margin: 0; color: #374151; font-size: 15px; line-height: 1.6;">
+                                <strong style="color: #000000; font-size: 16px;">Track Your Cycle</strong><br>
+                                <span style="color: #6b7280; font-size: 14px;">Log your periods, symptoms, and moods
+                                  effortlessly</span>
+                              </p>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 16px 0;">
+                        <table role="presentation" style="width: 100%; border-collapse: collapse;">
+                          <tr>
+                            <td style="width: 50px; vertical-align: top;">
+                              <div
+                                style="width: 36px; height: 36px; background: linear-gradient(135deg, #ec4899, #f9a8d4); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px;">
+                                🔔
+                              </div>
+                            </td>
+                            <td style="vertical-align: top; padding-left: 8px;">
+                              <p style="margin: 0; color: #374151; font-size: 15px; line-height: 1.6;">
+                                <strong style="color: #000000; font-size: 16px;">Get Gentle Reminders</strong><br>
+                                <span style="color: #6b7280; font-size: 14px;">Never be caught off guard with smart
+                                  predictions</span>
+                              </p>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 16px 0;">
+                        <table role="presentation" style="width: 100%; border-collapse: collapse;">
+                          <tr>
+                            <td style="width: 50px; vertical-align: top;">
+                              <div
+                                style="width: 36px; height: 36px; background: linear-gradient(135deg, #ec4899, #f9a8d4); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px;">
+                                💡
+                              </div>
+                            </td>
+                            <td style="vertical-align: top; padding-left: 8px;">
+                              <p style="margin: 0; color: #374151; font-size: 15px; line-height: 1.6;">
+                                <strong style="color: #000000; font-size: 16px;">Personalized Insights</strong><br>
+                                <span style="color: #6b7280; font-size: 14px;">Understand patterns and take control of your
+                                  wellness</span>
+                              </p>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 16px 0;">
+                        <table role="presentation" style="width: 100%; border-collapse: collapse;">
+                          <tr>
+                            <td style="width: 50px; vertical-align: top;">
+                              <div
+                                style="width: 36px; height: 36px; background: linear-gradient(135deg, #ec4899, #f9a8d4); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px;">
+                                🔒
+                              </div>
+                            </td>
+                            <td style="vertical-align: top; padding-left: 8px;">
+                              <p style="margin: 0; color: #374151; font-size: 15px; line-height: 1.6;">
+                                <strong style="color: #000000; font-size: 16px;">Private & Secure</strong><br>
+                                <span style="color: #6b7280; font-size: 14px;">Your data is encrypted and completely
+                                  private</span>
+                              </p>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+    
+                  <!-- Getting Started Section -->
+                  <div
+                    style="background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%); border-left: 4px solid #ec4899; padding: 24px; border-radius: 8px; margin-top: 30px;">
+                    <p style="margin: 0 0 12px; color: #000000; font-size: 16px; font-weight: 600;">
+                      🌸 Get Started in 3 Easy Steps
+                    </p>
+                    <ol style="margin: 0; padding-left: 20px; color: #374151; font-size: 14px; line-height: 1.8;">
+                      <li style="margin-bottom: 8px;">Log in and set up your profile</li>
+                      <li style="margin-bottom: 8px;">Enter your last period date to get started</li>
+                      <li style="margin-bottom: 0;">Explore insights and track daily</li>
+                    </ol>
+                  </div>
+    
+                  <!-- Help Section -->
+                  <div style="text-align: center; margin-top: 35px; padding-top: 30px; border-top: 1px solid #f3f4f6;">
+                    <p style="margin: 0 0 8px; color: #6b7280; font-size: 14px; line-height: 1.6;">
+                      Have questions or need support?
+                    </p>
+                    <p style="margin: 0; color: #374151; font-size: 14px; line-height: 1.6;">
+                      We're here to help! Reply to this email anytime.
+                    </p>
+                  </div>
+                </td>
+              </tr>
+    
+              <!-- Footer -->
+              <tr>
+                <td style="padding: 40px; background-color: #000000; text-align: center;">
+                  <div style="font-size: 32px; margin-bottom: 12px;">🌸</div>
+                  <p style="margin: 0 0 8px; color: #f9a8d4; font-size: 18px; font-weight: 600; letter-spacing: 0.5px;">
+                    Her Cycle Bloom
+                  </p>
+                  <p style="margin: 0 0 20px; color: #ec4899; font-size: 13px; font-style: italic;">
+                    Bloom into your best self
+                  </p>
+                  <p style="margin: 0 0 16px; color: #9ca3af; font-size: 14px; line-height: 1.6;">
+                    © 2024 Her Cycle Bloom. All rights reserved.
+                  </p>
+                  <p style="margin: 0; color: #6b7280; font-size: 12px; line-height: 1.5;">
+                    You're receiving this email because you signed up for Her Cycle Bloom.<br>
+                    Your privacy matters to us. We'll never share your personal information.
+                  </p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </body>
+    
+    </html>
+    <!-- `;
+    
+    const emailText = `
+    Welcome to Her Cycle Bloom 🌸
+    
+    Hi ${userName},
+    
+    Welcome to Her Cycle Bloom – your personal companion for understanding and embracing your cycle! We're here to help you
+    track your period, understand your body, and bloom into your best self.
+    
+    Whether you're tracking your menstrual cycle, monitoring symptoms, or planning ahead, we've got you covered with
+    personalized insights and gentle reminders.
+    
+    How Her Cycle Bloom Helps You:
+    
+    📅 Track Your Cycle
+    Log your periods, symptoms, and moods effortlessly
+    
+    🔔 Get Gentle Reminders
+    Never be caught off guard with smart predictions
+    
+    💡 Personalized Insights
+    Understand patterns and take control of your wellness
+    
+    🔒 Private & Secure
+    Your data is encrypted and completely private
+    
+    Get Started in 3 Easy Steps:
+    1. Log in and set up your profile
+    2. Enter your last period date to get started
+    3. Explore insights and track daily
+    
+    Have questions or need support? We're here to help! Reply to this email anytime.
+    
+    Her Cycle Bloom
+    Bloom into your best self
+    
+    © 2024 Her Cycle Bloom. All rights reserved.
+    Your privacy matters to us. We'll never share your personal information.
+    `;
+    
+    try {
+    const info = await transporter.sendMail({
+    from: `"Her Cycle Bloom" <${process.env.SMTP_FROM || process.env.SMTP_USER}>`,
+      to: userEmail,
+      subject: `Welcome to Her Cycle Bloom 🌸`,
+      text: emailText,
+      html: emailHtml,
+      });
+    
+      console.log('Welcome email sent:', info.messageId);
+      return { success: true, messageId: info.messageId };
+      } catch (error) {
+      console.error('Error sending welcome email:', error);
+      return { success: false, error };
+      }
+      }
+    
+      // Example usage in your signup API route:
+      /*
+      import { sendWelcomeEmail } from '@/lib/sendWelcomeEmail';
+    
+      export async function POST(request: Request) {
+      const { email, name } = await request.json();
+    
+      // ... your signup logic ...
+    
+      await sendWelcomeEmail({
+      userEmail: email,
+      userName: name,
+      });
+    
+      return Response.json({ success: true });
+      }
+      */ -->

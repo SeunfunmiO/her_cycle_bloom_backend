@@ -1,0 +1,30 @@
+const express = require('express')
+const {
+    signUp,
+    googleSignup,
+    signIn,
+    updateProfile,
+    enableNotif,
+    getUser,
+    updateReminderSettings,
+    deleteAccount,
+} = require('../controllers/userController')
+const { protect } = require('../middleware/authMiddleware')
+const router = express.Router()
+
+
+router.post('/signup', signUp)
+router.post('/google-signin', googleSignup)
+router.post('/sign-in', signIn)
+router.put('/create-profile/:id',updateProfile)
+router.put('/enable-notification/:id',enableNotif)
+router.get('/get-user/:id', getUser)
+router.put('/set-reminder', protect, updateReminderSettings)
+router.put('/delete-account/:id', protect, deleteAccount)
+
+
+
+
+
+
+module.exports = router
