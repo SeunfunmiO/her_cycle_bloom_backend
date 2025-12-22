@@ -18,7 +18,7 @@ const googleSignup = async (req, res) => {
                 photo
             });
 
-            await sendWelcomeMail(user.email);
+            await sendWelcomeMail(user.name,user.email);
         }
 
         res.status(200).json({
