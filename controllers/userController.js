@@ -18,7 +18,7 @@ const googleSignup = async (req, res) => {
                 photo
             });
 
-            await sendWelcomeMail(user.name,user.email);
+            await sendWelcomeMail(user.name, user.email);
         }
 
         res.status(200).json({
@@ -56,7 +56,11 @@ const signUp = async (req, res) => {
             password: hashedPassword,
         })
 
-        await sendWelcomeMail(user.email)
+        try {
+            await sendWelcomeMail(user.email)
+        } catch (mailError) {
+            console.error("Email error:", mailError)
+        }
 
         res.status(201).json({
             success: true,

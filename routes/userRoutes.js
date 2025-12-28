@@ -13,7 +13,7 @@ const { protect } = require('../middleware/authMiddleware')
 const router = express.Router()
 
 
-router.post('/signup', signUp)
+router.post('/sign-up', signUp)
 router.post('/google-signin', googleSignup)
 router.post('/sign-in', signIn)
 router.put('/create-profile/:id',updateProfile)
