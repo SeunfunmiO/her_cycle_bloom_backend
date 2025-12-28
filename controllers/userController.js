@@ -152,7 +152,39 @@ const updateProfile = async (req, res) => {
             user: updatedUser
         })
     } catch (error) {
-        console.log("update Profile Error : ", error);
+        console.log("Update Profile Error : ", error);
+        res.status(500).json({
+            status: false,
+            message: "Server error"
+        })
+    }
+}
+
+const userProfile = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const user = await UserModel.findById(id)
+        if (!user) {
+            return res.status(400).json({
+                status: false,
+                message: "User not found"
+            });
+        }
+
+        const userData = {
+            cycleLength: user.cycleLength,
+            lastPeriodDate: user.lastPeriodDate
+        }
+
+        res.status(200).json({
+            status: true,
+            message: "User profile fetched",
+            userData
+        })
+
+    } catch (error) {
+        console.log("Fetching User Profile Error : ", error);
         res.status(500).json({
             status: false,
             message: "Server error"
@@ -297,6 +329,7 @@ module.exports = {
     googleSignup,
     signIn,
     updateProfile,
+    userProfile,
     enableNotif,
     getUser,
     updateReminderSettings,

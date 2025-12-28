@@ -8,6 +8,7 @@ const {
     getUser,
     updateReminderSettings,
     deleteAccount,
+    userProfile,
 } = require('../controllers/userController')
 const { protect } = require('../middleware/authMiddleware')
 const router = express.Router()
@@ -17,6 +18,7 @@ router.post('/sign-up', signUp)
 router.post('/google-signin', googleSignup)
 router.post('/sign-in', signIn)
 router.put('/create-profile/:id',updateProfile)
+router.get('/user-profile',userProfile)
 router.put('/enable-notification/:id',enableNotif)
 router.get('/get-user/:id', getUser)
 router.put('/set-reminder', protect, updateReminderSettings)
