@@ -8,8 +8,8 @@ const periodRoute = require('./routes/periodRoutes.js')
 const connectDB = require("./config/db.js")
 connectDB()
 app.use(cors());
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({ limit: '5mb', extended: true }))
+app.use(express.json({ limit: '5mb' }))
 app.use('/user', userRoute)
 app.use('/period',periodRoute)
 
