@@ -62,42 +62,76 @@ const saveUserEntry = async (req, res) => {
         })
     }
 }
-
 const getEntry = async (req, res) => {
     try {
-        const { id } = req.params;
-
-        const entry = await PeriodModel.findById(id)
+        // req.user is already available from protect middleware
+        const entry = await PeriodModel.findOne({ user: req.user._id });
 
         if (!entry) {
             return res.status(404).json({
-                status: false,
+                success: false,
                 message: "No entry found"
             });
         }
 
         res.status(200).json({
             success: true,
-            message: "Entry fetched",
+            message: "Entry fetched successfully",
             entry: {
-                id: req.user._id,
+                id: entry._id,
                 periodStart: entry.periodStart,
                 periodEnd: entry.periodEnd,
                 flowIntensity: entry.flowIntensity,
                 symptoms: entry.symptoms,
                 mood: entry.mood,
-                notes: entry.notes,
+                notes: entry.notes
             }
-        })
+        });
+
     } catch (error) {
-        console.error("Getting Entry Error :", error);
+        console.error("Getting Entry Error:", error);
         res.status(500).json({
-            status: false,
-            message: "Something went wrong, please try again",
-            error: error.message
+            success: false,
+            message: "Something went wrong, please try again"
         });
     }
-}
+};
+
+// const getEntry = async (req, res) => {
+//     try {
+//         // const { id } = req.params;
+
+//         const entry = await PeriodModel.findById(id)
+
+//         if (!entry) {
+//             return res.status(404).json({
+//                 status: false,
+//                 message: "No entry found"
+//             });
+//         }
+
+//         res.status(200).json({
+//             success: true,
+//             message: "Entry fetched",
+//             entry: {
+//                 id: req.user._id,
+//                 periodStart: req.entry.periodStart,
+//                 periodEnd: req.entry.periodEnd,
+//                 flowIntensity: req.entry.flowIntensity,
+//                 symptoms: req.entry.symptoms,
+//                 mood: req.entry.mood,
+//                 notes: req.entry.notes,
+//             }
+//         })
+//     } catch (error) {
+//         console.error("Getting Entry Error :", error);
+//         res.status(500).json({
+//             status: false,
+//             message: "Something went wrong, please try again",
+//             error: error.message
+//         });
+//     }
+// }
 
 module.exports = {
     savePeriodDetails,

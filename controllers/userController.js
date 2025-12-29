@@ -225,42 +225,76 @@ const enableNotif = async (req, res) => {
 
 const getUser = async (req, res) => {
     try {
-        const { id } = req.params;
-
-        const user = await UserModel.findById(id)
-
-        if (!user) {
+        if (!req.user) {
             return res.status(404).json({
-                status: false,
+                success: false,
                 message: "User not found"
             });
         }
 
         res.status(200).json({
             success: true,
-            message: "Signed in successfully",
+            message: "User fetched successfully",
             user: {
-                id: user._id,
-                name: user.name,
-                address: user.address,
-                profilePicture: user.profilePicture,
-                email: user.email,
-                dateOfBirth: user.dateOfBirth,
-                isNotification: user.isNotification,
-                cycleLength: user.cycleLength,
-                lastPeriodDate: user.lastPeriodDate
-
+                id: req.user._id,
+                name: req.user.name,
+                address: req.user.address,
+                profilePicture: req.user.profilePicture,
+                email: req.user.email,
+                dateOfBirth: req.user.dateOfBirth,
+                isNotification: req.user.isNotification,
+                cycleLength: req.user.cycleLength,
+                lastPeriodDate: req.user.lastPeriodDate
             }
-        })
+        });
+
     } catch (error) {
-        console.error("Getting User Error :", error);
+        console.error("Getting User Error:", error);
         res.status(500).json({
-            status: false,
-            message: "Something went wrong, please try again",
-            error: error.message
+            success: false,
+            message: "Something went wrong, please try again"
         });
     }
-}
+};
+
+// const getUser = async (req, res) => {
+//     try {
+//         const { id } = req.params;
+
+//         const user = await UserModel.findOne(email)
+
+//         if (!user) {
+//             return res.status(404).json({
+//                 status: false,
+//                 message: "User not found"
+//             });
+//         }
+
+//         res.status(200).json({
+//             success: true,
+//             message: "Signed in successfully",
+//             user: {
+//                 id: user._id,
+//                 name: user.name,
+//                 address: user.address,
+//                 profilePicture: user.profilePicture,
+//                 email: user.email,
+//                 dateOfBirth: user.dateOfBirth,
+//                 isNotification: user.isNotification,
+//                 cycleLength: user.cycleLength,
+//                 lastPeriodDate: user.lastPeriodDate
+
+//             }
+//         })
+//     } catch (error) {
+//         console.error("Getting User Error :", error);
+//         res.status(500).json({
+//             status: false,
+//             message: "Something went wrong, please try again",
+//             error: error.message
+//         });
+//     }
+// }
 
 const updateReminderSettings = async (req, res) => {
     try {

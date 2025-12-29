@@ -20,7 +20,7 @@ router.post('/sign-in', signIn)
 router.put('/create-profile/:id',updateProfile)
 router.get('/user-profile/:id',userProfile)
 router.put('/enable-notification/:id',enableNotif)
-router.get('/get-user/:id', getUser)
+router.get('/get-user', getUser)
 router.put('/set-reminder', protect, updateReminderSettings)
 router.put('/delete-account/:id', protect, deleteAccount)
 

@@ -10,7 +10,7 @@ const router = express.Router()
 
 router.post('/create-period-details', protect, savePeriodDetails)
 router.put('/save-entry', protect, saveUserEntry)
-router.get('/get-entry/:id', protect, getEntry)
+router.get('/get-entry', protect, getEntry)
 
 
 module.exports = router
