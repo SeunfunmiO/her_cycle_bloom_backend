@@ -17,12 +17,12 @@ const router = express.Router()
 router.post('/sign-up', signUp)
 router.post('/google-signin', googleSignup)
 router.post('/sign-in', signIn)
-router.put('/create-profile/:id',updateProfile)
-router.get('/user-profile/:id',userProfile)
-router.put('/enable-notification/:id',enableNotif)
-router.get('/get-user', getUser)
+router.put('/create-profile',protect,updateProfile)
+router.get('/user-profile',protect,userProfile)
+router.put('/enable-notification',protect,enableNotif)
+router.get('/get-user',protect, getUser)
 router.put('/set-reminder', protect, updateReminderSettings)
-router.put('/delete-account/:id', protect, deleteAccount)
+router.put('/delete-account', protect, deleteAccount)
 
 
 

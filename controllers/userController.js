@@ -122,7 +122,12 @@ const signIn = async (req, res) => {
 
 const updateProfile = async (req, res) => {
     try {
-        const { id } = req.params;
+        if (!req.user) {
+            return res.status(404).json({
+                success: false,
+                message: "User not found"
+            });
+        }
 
         const { name, email, address, profilePicture, dateOfBirth, cycleLength, lastPeriodDate } = req.body;
 
@@ -134,7 +139,7 @@ const updateProfile = async (req, res) => {
             })
         }
 
-        const updatedUser = await UserModel.findByIdAndUpdate(id, {
+        const updatedUser = await UserModel.findByIdAndUpdate(req.user._id, {
             name,
             email,
             address,
@@ -147,14 +152,14 @@ const updateProfile = async (req, res) => {
         )
 
         res.status(200).json({
-            status: true,
+            success:true,
             message: "Profile created successfully",
             user: updatedUser
         })
     } catch (error) {
         console.log("Update Profile Error : ", error);
         res.status(500).json({
-            status: false,
+            success:false,
             message: "Server error"
         })
     }
@@ -162,12 +167,17 @@ const updateProfile = async (req, res) => {
 
 const userProfile = async (req, res) => {
     try {
-        const { id } = req.params;
+        if (!req.user) {
+            return res.status(404).json({
+                success: false,
+                message: "User not found"
+            });
+        }
 
-        const user = await UserModel.findById(id)
+        const user = await UserModel.findById(req.user._id)
         if (!user) {
             return res.status(400).json({
-                status: false,
+                success:false,
                 message: "User not found"
             });
         }
@@ -178,7 +188,7 @@ const userProfile = async (req, res) => {
         }
 
         res.status(200).json({
-            status: true,
+            success:true,
             message: "User profile fetched",
             userData
         })
@@ -186,7 +196,7 @@ const userProfile = async (req, res) => {
     } catch (error) {
         console.log("Fetching User Profile Error : ", error);
         res.status(500).json({
-            status: false,
+            success:false,
             message: "Server error"
         })
     }
@@ -194,12 +204,17 @@ const userProfile = async (req, res) => {
 
 const enableNotif = async (req, res) => {
     try {
-        const { id } = req.params;
+        if (!req.user) {
+            return res.status(404).json({
+                success: false,
+                message: "User not found"
+            });
+        }
 
-        const user = await UserModel.findById(id);
+        const user = await UserModel.findById(req.user._id);
         if (!user) {
             return res.status(404).json({
-                status: false,
+                success:false,
                 message: "User not found"
             });
         }
@@ -208,7 +223,7 @@ const enableNotif = async (req, res) => {
         await user.save();
 
         res.status(200).json({
-            status: true,
+            success:true,
             message: "Notification enabled",
             user
         });
@@ -216,7 +231,7 @@ const enableNotif = async (req, res) => {
     } catch (error) {
         console.error("Enable notification error:", error);
         res.status(500).json({
-            status: false,
+            success:false,
             message: "Something went wrong, please try again",
             error: error.message
         });
@@ -265,7 +280,7 @@ const getUser = async (req, res) => {
 
 //         if (!user) {
 //             return res.status(404).json({
-//                 status: false,
+//                 success:false,
 //                 message: "User not found"
 //             });
 //         }
@@ -289,7 +304,7 @@ const getUser = async (req, res) => {
 //     } catch (error) {
 //         console.error("Getting User Error :", error);
 //         res.status(500).json({
-//             status: false,
+//             success:false,
 //             message: "Something went wrong, please try again",
 //             error: error.message
 //         });
@@ -313,20 +328,20 @@ const updateReminderSettings = async (req, res) => {
 
         if (!user) {
             return res.status(400).json({
-                status: false,
+                success:false,
                 message: "No user found"
             })
         }
 
         res.status(200).json({
-            status: true,
+            success:true,
             message: 'Reminder settings updated',
             settings: user.periodSettings
         })
     } catch (error) {
         console.log("Error updating period settings : ", error);
         return res.status(500).json({
-            status: false,
+            success:false,
             message: "Internal server error"
         })
     }
@@ -334,26 +349,31 @@ const updateReminderSettings = async (req, res) => {
 
 const deleteAccount = async (req, res) => {
     try {
-        const { id } = req.params;
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "User not found"
+            });
+        }
 
-        const user = await UserModel.findByIdAndDelete(id)
+        const user = await UserModel.findByIdAndDelete(req.user._id)
 
         if (!user) {
             return res.status(400).json({
-                status: false,
+                success:false,
                 message: "Something went wrong , try again"
             })
         }
 
         res.status(200).json({
-            status: true,
+            success:true,
             message: "Account deleted successfully"
         })
 
     } catch (error) {
         console.log("Error Deleting Account  : ", error);
         return res.status(500).json({
-            status: false,
+            success:false,
             message: "Internal server error"
         })
     }
