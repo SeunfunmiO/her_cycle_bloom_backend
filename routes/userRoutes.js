@@ -9,6 +9,11 @@ const {
     updateReminderSettings,
     deleteAccount,
     userProfile,
+    changePassword,
+    logOut,
+    forgotPassword,
+    resetPassword,
+    verifyOtp,
 } = require('../controllers/userController')
 const { protect } = require('../middleware/authMiddleware')
 const router = express.Router()
@@ -23,8 +28,10 @@ router.put('/enable-notification',protect,enableNotif)
 router.get('/get-user',protect, getUser)
 router.put('/set-reminder', protect, updateReminderSettings)
 router.put('/delete-account', protect, deleteAccount)
-
-
+router.put('/change-password',protect,changePassword)
+router.post('/forgot-password', forgotPassword)
+router.post('/verify-otp', verifyOtp)
+router.post('/reset-password',resetPassword)
 
 
 

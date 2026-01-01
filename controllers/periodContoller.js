@@ -64,7 +64,6 @@ const saveUserEntry = async (req, res) => {
 }
 const getEntry = async (req, res) => {
     try {
-        // req.user is already available from protect middleware
         const entry = await PeriodModel.findOne({ user: req.user._id });
 
         if (!entry) {

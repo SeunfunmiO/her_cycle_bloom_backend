@@ -13,6 +13,13 @@ const userSchema = new mongoose.Schema({
         type: String,
         select: false
     },
+    newPassword: {
+        required: function () {
+            return !this.googleId
+        },
+        type: String,
+        select: false
+    },
     googleId: {
         type: String,
         defaut: null
@@ -21,9 +28,9 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: null
     },
-    address:{
-        type:String,
-        default:null
+    address: {
+        type: String,
+        default: null
     },
     photo: String,
     dateOfBirth: {
@@ -74,6 +81,28 @@ const userSchema = new mongoose.Schema({
                 defalut: true
             }
         },
+    },
+    resetPasswordToken: {
+        type: String,
+    },
+    resetPasswordExpire: {
+        type: Date,
+        default: Date.now
+    },
+    resetOtp: {
+        type: String,
+    },
+    resetOtpExpires: {
+        type: Date,
+        default: Date.now
+    },
+    isOtpVerified: {
+        type: Boolean,
+        default: false
+    },
+    passwordChangedAt: {
+        type: Date,
+        default: Date.now
     },
     createdAt: {
         type: Date,
