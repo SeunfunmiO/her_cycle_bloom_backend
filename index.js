@@ -8,11 +8,20 @@ const periodRoute = require('./routes/periodRoutes.js')
 const connectDB = require("./config/db.js")
 connectDB()
 app.use(cors());
-app.use(express.urlencoded({ limit: '5mb', extended: true }))
 app.use(express.json({ limit: '5mb' }))
+app.use(express.urlencoded({ limit: '5mb', extended: true }))
 app.use('/user', userRoute)
-app.use('/period',periodRoute)
+app.use('/period', periodRoute)
 
+
+app.use((err, req, res, next) => {
+    if (err.type === "Entity is too large") {
+        return res.status(413).json({
+            message: "Payload is too large, Image exceeds required size"
+        })
+    }
+    next(err)
+})
 
 
 app.get('/', (req, res) => {
