@@ -412,11 +412,11 @@ const forgotPassword = async (req, res) => {
 
         const resetToken = crypto.randomBytes(32).toString("hex");
         user.resetPasswordToken = crypto.createHash("sha256").update(resetToken).digest("hex");
-        user.resetPasswordExpire = Date.now() + 15 * 60 * 1000; 
+        user.resetPasswordExpire = Date.now() + 15 * 60 * 1000;
 
         const otp = otpGenerator.generate(6, { upperCase: false, specialChars: false, alphabets: false });
         user.resetOtp = otp;
-        user.resetOtpExpires = Date.now() + 10 * 60 * 1000; 
+        user.resetOtpExpires = Date.now() + 10 * 60 * 1000;
         user.isOtpVerified = false;
 
         await user.save();
@@ -494,7 +494,7 @@ const resetPassword = async (req, res) => {
 
         return res.status(200).json({ success: true, message: "Password reset successful" });
     } catch (error) {
-        console.error(error);
+        console.error("Internal server error", error);
         return res.status(500).json({ success: false, message: "Internal server error" });
     }
 };
