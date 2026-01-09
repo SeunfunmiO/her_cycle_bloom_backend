@@ -45,7 +45,7 @@ const signUp = async (req, res) => {
     const { email, password } = req.body
 
     try {
-        const existingUser = await UserModel.findOne({ email }).select("+password")
+        const existingUser = await UserModel.findOne({ email })
         if (existingUser) {
             return res.status(400).json({
                 success: false,
@@ -62,11 +62,9 @@ const signUp = async (req, res) => {
             password: hashedPassword,
         })
 
-        try {
-            await sendWelcomeMail(user.email)
-        } catch (mailError) {
-            console.error("Email error:", mailError)
-        }
+        sendWelcomeMail(user.email).catch(err =>
+            console.error("Welcome mail error:", err)
+        );
 
         res.status(201).json({
             success: true,
