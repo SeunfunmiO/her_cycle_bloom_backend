@@ -62,6 +62,10 @@ const signUp = async (req, res) => {
             password: hashedPassword,
         })
 
+        console.log("email", email, "password", password);
+        console.log("email", user.email, "password", user.password);
+        
+
         sendWelcomeMail(user.email).catch(err =>
             console.error("Welcome mail error:", err)
         );
