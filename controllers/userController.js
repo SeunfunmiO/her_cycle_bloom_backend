@@ -62,13 +62,11 @@ const signUp = async (req, res) => {
             password: hashedPassword,
         })
 
-        console.log("email", email, "password", password);
-        console.log("email", user.email, "password", user.password);
-        
-
-        sendWelcomeMail(user.email).catch(err =>
-            console.error("Welcome mail error:", err)
-        );
+        // try {
+        //     await sendWelcomeMail(user.email)
+        // } catch (mailError) {
+        //     console.error("Email error:", mailError)
+        // }
 
         res.status(201).json({
             success: true,
