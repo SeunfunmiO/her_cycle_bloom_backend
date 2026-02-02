@@ -83,7 +83,8 @@ const getEntry = async (req, res) => {
                 flowIntensity: entry.flowIntensity,
                 symptoms: entry.symptoms,
                 mood: entry.mood,
-                notes: entry.notes
+                notes: entry.notes,
+                cycleLength:entry.cycleLength
             }
         });
 

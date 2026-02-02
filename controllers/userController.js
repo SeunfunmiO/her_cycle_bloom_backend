@@ -174,14 +174,16 @@ const updateProfile = async (req, res) => {
 
 const userProfile = async (req, res) => {
     try {
-        if (!req.user) {
+        const user = req.user;
+
+        if (!user) {
             return res.status(404).json({
                 success: false,
                 message: "User not found"
             });
         }
 
-        const user = await UserModel.findById(req.user._id)
+        // const user = await UserModel.findById(req.user._id)
         if (!user) {
             return res.status(400).json({
                 success: false,
