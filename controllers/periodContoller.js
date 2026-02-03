@@ -97,44 +97,75 @@ const getEntry = async (req, res) => {
     }
 };
 
-// const getEntry = async (req, res) => {
-//     try {
-//         // const { id } = req.params;
 
-//         const entry = await PeriodModel.findById(id)
+const endPeriod = async (req, res) => {
+    try {
+        const { id } = req.params
+        const { periodEnd } = req.body
+        const userId = req.user.id
 
-//         if (!entry) {
-//             return res.status(404).json({
-//                 status: false,
-//                 message: "No entry found"
-//             });
-//         }
+        if (!periodEnd) {
+            return res.status(400).json({
+                status: false,
+                message: "periodEnd is required",
+            })
+        }
 
-//         res.status(200).json({
-//             success: true,
-//             message: "Entry fetched",
-//             entry: {
-//                 id: req.user._id,
-//                 periodStart: req.entry.periodStart,
-//                 periodEnd: req.entry.periodEnd,
-//                 flowIntensity: req.entry.flowIntensity,
-//                 symptoms: req.entry.symptoms,
-//                 mood: req.entry.mood,
-//                 notes: req.entry.notes,
-//             }
-//         })
-//     } catch (error) {
-//         console.error("Getting Entry Error :", error);
-//         res.status(500).json({
-//             status: false,
-//             message: "Something went wrong, please try again",
-//             error: error.message
-//         });
-//     }
-// }
+        const period = await PeriodModel.findOne({
+            _id: id,
+            user: userId,
+        })
+
+        if (!period) {
+            return res.status(404).json({
+                status: false,
+                message: "Period not found",
+            })
+        }
+
+        const start = new Date(period.periodStart)
+        const end = new Date(periodEnd)
+
+        if (end < start) {
+            return res.status(400).json({
+                status: false,
+                message: "Period end cannot be before start",
+            })
+        }
+
+      
+        const MAX_PERIOD_LENGTH = 10
+        const diff =
+            (end - start) / (1000 * 60 * 60 * 24) + 1
+
+        if (diff > MAX_PERIOD_LENGTH) {
+            return res.status(400).json({
+                status: false,
+                message: "Period length is unusually long",
+            })
+        }
+
+        period.periodEnd = end
+        await period.save()
+
+        return res.status(200).json({
+            status: true,
+            message: "Period ended successfully",
+            period,
+        })
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({
+            status: false,
+            message: "Internal Server Error",
+        })
+    }
+}
+
 
 module.exports = {
     savePeriodDetails,
     saveUserEntry,
-    getEntry
+    getEntry,
+    endPeriod
 }
