@@ -4,9 +4,16 @@ const savePeriodDetails = async (req, res) => {
     try {
         const { periodStart, periodEnd, flowIntensity, symptoms, mood, notes } = req.body
 
-        const createPeriodDetails = await PeriodModel.create({
+        if (!periodStart) {
+            return res.status(400).json({
+                success: false,
+                message: "Period start date is required"
+            })
+        }
+
+        const entry = await PeriodModel.create({
             periodStart,
-            periodEnd,
+            periodEnd: periodEnd || null,
             flowIntensity,
             symptoms,
             mood,
@@ -14,27 +21,18 @@ const savePeriodDetails = async (req, res) => {
             user: req.user._id
         })
 
-        res.status(200).json({
-            status: true,
-            message: "Details created",
-            createPeriodDetails: {
-                id: createPeriodDetails._id,
-                periodStart: createPeriodDetails.periodStart,
-                periodEnd: createPeriodDetails.periodEnd,
-                flowIntensity: createPeriodDetails.flowIntensity,
-                symptoms: createPeriodDetails.symptoms,
-                mood: createPeriodDetails.mood,
-                notes: createPeriodDetails.notes
-            }
+        res.status(201).json({
+            success: true,
+            message: "Period logged successfully",
+            entry
         })
     } catch (error) {
-        console.log("Error Creating Period Details : ", error);
+        console.error("Error Creating Period Details:", error)
         res.status(500).json({
-            status: false,
+            success: false,
             message: "Internal Server Error"
         })
     }
-
 }
 
 const saveUserEntry = async (req, res) => {
@@ -62,32 +60,26 @@ const saveUserEntry = async (req, res) => {
         })
     }
 }
+
 const getEntry = async (req, res) => {
     try {
-        const entry = await PeriodModel.findOne({ user: req.user._id });
-
-        if (!entry) {
-            return res.status(404).json({
-                success: false,
-                message: "No entry found"
-            });
-        }
+        const entries = await PeriodModel.find({ user: req.user._id })
+            .sort({ periodStart: -1 })
 
         res.status(200).json({
             success: true,
-            message: "Entry fetched successfully",
-            entry,
-            cycleLength:entry.cycleLength
-        });
+            message: "Entries fetched successfully",
+            entries
+        })
 
     } catch (error) {
-        console.error("Getting Entry Error:", error);
+        console.error("Getting Entry Error:", error)
         res.status(500).json({
             success: false,
             message: "Something went wrong, please try again"
-        });
+        })
     }
-};
+}
 
 
 const endPeriod = async (req, res) => {
