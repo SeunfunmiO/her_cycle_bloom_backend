@@ -76,16 +76,8 @@ const getEntry = async (req, res) => {
         res.status(200).json({
             success: true,
             message: "Entry fetched successfully",
-            entry: {
-                id: entry._id,
-                periodStart: entry.periodStart,
-                periodEnd: entry.periodEnd,
-                flowIntensity: entry.flowIntensity,
-                symptoms: entry.symptoms,
-                mood: entry.mood,
-                notes: entry.notes,
-                cycleLength:entry.cycleLength
-            }
+            entry,
+            cycleLength:entry.cycleLength
         });
 
     } catch (error) {
