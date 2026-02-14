@@ -28,6 +28,11 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: null
     },
+    language:{
+        type:[String],
+        enum:['english','chinese'],
+        default:'english'
+    },
     address: {
         type: String,
         default: null
