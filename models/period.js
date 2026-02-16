@@ -28,8 +28,7 @@ const PeriodSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
-    }
-
+    },
 }, { timestamps: true })
 
 const PeriodModel = mongoose.model('Period', PeriodSchema)
