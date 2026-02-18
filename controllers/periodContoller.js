@@ -91,13 +91,7 @@ const getEntries = async (req, res) => {
         const entries = await PeriodModel.find({ user: req.user._id })
             .sort({ periodStart: -1 })
 
-        if (!entries) {
-            return res.status(404).json({
-                success: false,
-                message: "Entries not found"
-            })
-        }
-
+       
         res.status(200).json({
             success: true,
             message: "Entries fetched successfully",
@@ -113,11 +107,14 @@ const getEntries = async (req, res) => {
     }
 }
 
-const getSinglePeriodEntry = async (req, res) => {
+const getSingleEntry = async (req, res) => {
     try {
         const { id } = req.params
 
-        const entry = await PeriodModel.findById(id)
+        const entry = await PeriodModel.findOne({
+            _id: id,
+            user: req.user._id   // 🔐 very important (security)
+        })
 
         if (!entry) {
             return res.status(404).json({
@@ -130,14 +127,15 @@ const getSinglePeriodEntry = async (req, res) => {
             success: true,
             entry
         })
+
     } catch (error) {
+        console.error("Get Single Entry Error:", error)
         res.status(500).json({
             success: false,
-            message: error.message
+            message: "Something went wrong"
         })
     }
 }
-
 
 const endPeriod = async (req, res) => {
     try {
