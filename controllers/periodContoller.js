@@ -85,37 +85,18 @@ const saveUserEntry = async (req, res) => {
     }
 };
 
-
-// const saveUserEntry = async (req, res) => {
-//     try {
-//         const { flowIntensity, symptoms, mood, notes } = req.body;
-
-//         const entry = await PeriodModel.create({
-//             flowIntensity,
-//             symptoms,
-//             mood,
-//             notes,
-//             user: req.user._id
-//         });
-
-//         res.status(200).json({
-//             status: true,
-//             message: "Entry saved successfully",
-//             entry
-//         })
-//     } catch (error) {
-//         console.log("Error Updating Period Details : ", error);
-//         res.status(500).json({
-//             status: false,
-//             message: "Internal Server Error"
-//         })
-//     }
-// }
-
-const getEntry = async (req, res) => {
+//returns all entries
+const getEntries = async (req, res) => {
     try {
         const entries = await PeriodModel.find({ user: req.user._id })
             .sort({ periodStart: -1 })
+
+        if (!entries) {
+            return res.status(404).json({
+                success: false,
+                message: "Entries not found"
+            })
+        }
 
         res.status(200).json({
             success: true,
@@ -128,6 +109,31 @@ const getEntry = async (req, res) => {
         res.status(500).json({
             success: false,
             message: "Something went wrong, please try again"
+        })
+    }
+}
+
+const getSinglePeriodEntry = async (req, res) => {
+    try {
+        const { id } = req.params
+
+        const entry = await PeriodModel.findById(id)
+
+        if (!entry) {
+            return res.status(404).json({
+                success: false,
+                message: "Entry not found"
+            })
+        }
+
+        res.status(200).json({
+            success: true,
+            entry
+        })
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
         })
     }
 }
@@ -168,7 +174,7 @@ const endPeriod = async (req, res) => {
             })
         }
 
-      
+
         const MAX_PERIOD_LENGTH = 10
         const diff =
             (end - start) / (1000 * 60 * 60 * 24) + 1
@@ -201,6 +207,7 @@ const endPeriod = async (req, res) => {
 module.exports = {
     savePeriodDetails,
     saveUserEntry,
-    getEntry,
-    endPeriod
+    getEntries,
+    endPeriod,
+    getSinglePeriodEntry
 }
