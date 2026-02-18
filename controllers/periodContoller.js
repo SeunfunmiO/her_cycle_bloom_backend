@@ -207,5 +207,5 @@ module.exports = {
     saveUserEntry,
     getEntries,
     endPeriod,
-    getSinglePeriodEntry
+    getSingleEntry
 }
